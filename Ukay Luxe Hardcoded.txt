@@ -1,0 +1,3787 @@
+package ukayluxe;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.table.DefaultTableModel;
+
+
+public class UkayLuxe extends JFrame implements ActionListener {
+    
+    private final Image BGImage, BGImage2;
+    private final JButton ukayna = new JButton("UKAY NA");
+    private final JButton close = Close();
+    private final JButton back = ReturnToHomepage();
+    private final JButton back2 = ReturnToShirtsPage();
+    private final JButton back3 = ReturnToShortsPage();
+    private final JButton back4 = ReturnToPantsPage();
+    private final JButton back5 = ReturnToPoloShirtsPage();
+    private final JButton back6 = ReturnToSweatShirtsPage();
+    private final JButton back7 = ReturnToDressesPage();
+    private final JButton back8 = ReturnToJacketsPage();
+    private final JButton back9 = ReturnToHatsPage();
+    private final JButton back10 = ReturnToShoesPage();
+    private final JButton back11 = ReturnToSandalsPage();
+    private final JButton back12 = ReturnToLandingPage();
+    private final JButton cart = Cart();
+    private final JButton add2cart = AddToCart();
+    
+    private Clip clip;
+    Border buttonBorder = BorderFactory.createLineBorder(new Color(182, 214, 237), 5);
+    
+    private DefaultTableModel cartModel;
+    private JTable cartTable;
+    
+
+    int buttonWidth = 175;
+    int buttonHeight = 300;
+    int buttonWidth2 = 250;
+    int buttonHeight2 = 500;
+    int buttonWidth3 = 550;
+    int buttonHeight3 = 650;
+    int product1x = 15;
+    int product2x = 285;
+    int product3x = 558;
+    int product4x = 830;
+    int product5x = 1100;
+    int producty = 150;
+    int productpageX = 15;
+    int productpageY = 95;
+    
+    //HOMEPAGE ICONS
+    ImageIcon shirt_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\T-SHIRTS.png");
+    ImageIcon short_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\SHORTS.png");
+    ImageIcon p_shirt_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\POLO SHIRTS.png");
+    ImageIcon s_shirt_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\SWEATSHIRTS.png");
+    ImageIcon pants_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\PANTS.png");
+    ImageIcon dress_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\DRESSES.png");
+    ImageIcon jacket_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\JACKETS.png");
+    ImageIcon hat_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\HATS.png");
+    ImageIcon shoe_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\SHOES.png");
+    ImageIcon sandal_image = new ImageIcon("D:\\Ukay Luxe\\ICONS\\SANDALS.png");
+    Image scaledImage1 = shirt_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage2 = short_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage3 = p_shirt_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage4 = s_shirt_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage5 = pants_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage6 = dress_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage7 = jacket_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage8 = hat_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage9 = shoe_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    Image scaledImage10 = sandal_image.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH);
+    ImageIcon scaledIcon1 = new ImageIcon(scaledImage1);
+    ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
+    ImageIcon scaledIcon3 = new ImageIcon(scaledImage3);
+    ImageIcon scaledIcon4 = new ImageIcon(scaledImage4);
+    ImageIcon scaledIcon5 = new ImageIcon(scaledImage5);
+    ImageIcon scaledIcon6 = new ImageIcon(scaledImage6);
+    ImageIcon scaledIcon7 = new ImageIcon(scaledImage7);
+    ImageIcon scaledIcon8 = new ImageIcon(scaledImage8);
+    ImageIcon scaledIcon9 = new ImageIcon(scaledImage9);
+    ImageIcon scaledIcon10 = new ImageIcon(scaledImage10);
+    JButton shirts = new JButton(scaledIcon1);
+    JButton shorts = new JButton(scaledIcon2);
+    JButton polo_shirts = new JButton(scaledIcon3);
+    JButton sweat_shirts = new JButton(scaledIcon4);
+    JButton pants = new JButton(scaledIcon5);
+    JButton dresses = new JButton(scaledIcon6);
+    JButton jackets = new JButton(scaledIcon7);
+    JButton hats = new JButton(scaledIcon8);
+    JButton shoes = new JButton(scaledIcon9);
+    JButton sandals = new JButton(scaledIcon10);
+
+    //T-SHIRTS PRODUCT ICONS
+    ImageIcon shirts1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT 1.png");
+    ImageIcon shirts2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT 2.png");
+    ImageIcon shirts3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT 3.png");
+    ImageIcon shirts4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT 4.png");
+    ImageIcon shirts5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT 5.png");
+    Image scaledProductImage1 = shirts1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage2 = shirts2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage3 = shirts3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage4 = shirts4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage5 = shirts5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon1 = new ImageIcon(scaledProductImage1);
+    ImageIcon scaledProductIcon2 = new ImageIcon(scaledProductImage2);
+    ImageIcon scaledProductIcon3 = new ImageIcon(scaledProductImage3);
+    ImageIcon scaledProductIcon4 = new ImageIcon(scaledProductImage4);
+    ImageIcon scaledProductIcon5 = new ImageIcon(scaledProductImage5);
+    JButton shirts1 = new JButton(scaledProductIcon1);
+    JButton shirts2 = new JButton(scaledProductIcon2);
+    JButton shirts3 = new JButton(scaledProductIcon3);
+    JButton shirts4 = new JButton(scaledProductIcon4);
+    JButton shirts5 = new JButton(scaledProductIcon5);
+
+    //SHORTS PRODUCT ICONS
+    ImageIcon shorts1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT 1.png");
+    ImageIcon shorts2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT 2.png");
+    ImageIcon shorts3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT 3.png");
+    ImageIcon shorts4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT 4.png");
+    ImageIcon shorts5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT 5.png");
+    Image scaledProductImage11 = shorts1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage12 = shorts2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage13 = shorts3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage14 = shorts4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage15 = shorts5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon11 = new ImageIcon(scaledProductImage11);
+    ImageIcon scaledProductIcon12 = new ImageIcon(scaledProductImage12);
+    ImageIcon scaledProductIcon13 = new ImageIcon(scaledProductImage13);
+    ImageIcon scaledProductIcon14 = new ImageIcon(scaledProductImage14);
+    ImageIcon scaledProductIcon15 = new ImageIcon(scaledProductImage15);
+    JButton shorts1 = new JButton(scaledProductIcon11);
+    JButton shorts2 = new JButton(scaledProductIcon12);
+    JButton shorts3 = new JButton(scaledProductIcon13);
+    JButton shorts4 = new JButton(scaledProductIcon14);
+    JButton shorts5 = new JButton(scaledProductIcon15);
+    
+    //PANTS PRODUCT ICONS
+    ImageIcon pants1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS 1.png");
+    ImageIcon pants2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS 2.png");
+    ImageIcon pants3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS 3.png");
+    ImageIcon pants4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS 4.png");
+    ImageIcon pants5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS 5.png");
+    Image scaledProductImage21 = pants1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage22 = pants2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage23 = pants3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage24 = pants4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage25 = pants5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon21 = new ImageIcon(scaledProductImage21);
+    ImageIcon scaledProductIcon22 = new ImageIcon(scaledProductImage22);
+    ImageIcon scaledProductIcon23 = new ImageIcon(scaledProductImage23);
+    ImageIcon scaledProductIcon24 = new ImageIcon(scaledProductImage24);
+    ImageIcon scaledProductIcon25 = new ImageIcon(scaledProductImage25);
+    JButton pants1 = new JButton(scaledProductIcon21);
+    JButton pants2 = new JButton(scaledProductIcon22);
+    JButton pants3 = new JButton(scaledProductIcon23);
+    JButton pants4 = new JButton(scaledProductIcon24);
+    JButton pants5 = new JButton(scaledProductIcon25);
+
+    //P0LO SHIRT PRODUCT ICONS
+    ImageIcon p_shirt1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT 1.png");
+    ImageIcon p_shirt2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT 2.png");
+    ImageIcon p_shirt3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT 3.png");
+    ImageIcon p_shirt4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT 4.png");
+    ImageIcon p_shirt5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT 5.png");
+    Image scaledProductImage31 = p_shirt1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage32 = p_shirt2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage33 = p_shirt3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage34 = p_shirt4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage35 = p_shirt5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon31 = new ImageIcon(scaledProductImage31);
+    ImageIcon scaledProductIcon32 = new ImageIcon(scaledProductImage32);
+    ImageIcon scaledProductIcon33 = new ImageIcon(scaledProductImage33);
+    ImageIcon scaledProductIcon34 = new ImageIcon(scaledProductImage34);
+    ImageIcon scaledProductIcon35 = new ImageIcon(scaledProductImage35);
+    JButton p_shirt1 = new JButton(scaledProductIcon31);
+    JButton p_shirt2 = new JButton(scaledProductIcon32);
+    JButton p_shirt3 = new JButton(scaledProductIcon33);
+    JButton p_shirt4 = new JButton(scaledProductIcon34);
+    JButton p_shirt5 = new JButton(scaledProductIcon35);
+
+    //SWEAT SHIRT PRODUCT ICONS
+    ImageIcon s_shirt1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT 1.png");
+    ImageIcon s_shirt2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT 2.png");
+    ImageIcon s_shirt3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT 3.png");
+    ImageIcon s_shirt4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT 4.png");
+    ImageIcon s_shirt5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT 5.png");
+    Image scaledProductImage41 = s_shirt1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage42 = s_shirt2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage43 = s_shirt3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage44 = s_shirt4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage45 = s_shirt5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon41 = new ImageIcon(scaledProductImage41);
+    ImageIcon scaledProductIcon42 = new ImageIcon(scaledProductImage42);
+    ImageIcon scaledProductIcon43 = new ImageIcon(scaledProductImage43);
+    ImageIcon scaledProductIcon44 = new ImageIcon(scaledProductImage44);
+    ImageIcon scaledProductIcon45 = new ImageIcon(scaledProductImage45);
+    JButton s_shirt1 = new JButton(scaledProductIcon41);
+    JButton s_shirt2 = new JButton(scaledProductIcon42);
+    JButton s_shirt3 = new JButton(scaledProductIcon43);
+    JButton s_shirt4 = new JButton(scaledProductIcon44);
+    JButton s_shirt5 = new JButton(scaledProductIcon45);
+
+    // For dresses
+    ImageIcon dress1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS 1.png");
+    ImageIcon dress2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS 2.png");
+    ImageIcon dress3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS 3.png");
+    ImageIcon dress4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS 4.png");
+    ImageIcon dress5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS 5.png");
+    Image scaledProductImage51 = dress1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage52 = dress2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage53 = dress3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage54 = dress4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage55 = dress5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon51 = new ImageIcon(scaledProductImage51);
+    ImageIcon scaledProductIcon52 = new ImageIcon(scaledProductImage52);
+    ImageIcon scaledProductIcon53 = new ImageIcon(scaledProductImage53);
+    ImageIcon scaledProductIcon54 = new ImageIcon(scaledProductImage54);
+    ImageIcon scaledProductIcon55 = new ImageIcon(scaledProductImage55);
+    JButton dress1 = new JButton(scaledProductIcon51);
+    JButton dress2 = new JButton(scaledProductIcon52);
+    JButton dress3 = new JButton(scaledProductIcon53);
+    JButton dress4 = new JButton(scaledProductIcon54);
+    JButton dress5 = new JButton(scaledProductIcon55);
+
+    // For jackets
+    ImageIcon jacket1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET 1.png");
+    ImageIcon jacket2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET 2.png");
+    ImageIcon jacket3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET 3.png");
+    ImageIcon jacket4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET 4.png");
+    ImageIcon jacket5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET 5.png");
+    Image scaledProductImage61 = jacket1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage62 = jacket2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage63 = jacket3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage64 = jacket4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage65 = jacket5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon61 = new ImageIcon(scaledProductImage61);
+    ImageIcon scaledProductIcon62 = new ImageIcon(scaledProductImage62);
+    ImageIcon scaledProductIcon63 = new ImageIcon(scaledProductImage63);
+    ImageIcon scaledProductIcon64 = new ImageIcon(scaledProductImage64);
+    ImageIcon scaledProductIcon65 = new ImageIcon(scaledProductImage65);
+    JButton jacket1 = new JButton(scaledProductIcon61);
+    JButton jacket2 = new JButton(scaledProductIcon62);
+    JButton jacket3 = new JButton(scaledProductIcon63);
+    JButton jacket4 = new JButton(scaledProductIcon64);
+    JButton jacket5 = new JButton(scaledProductIcon65);
+
+    // For hats
+    ImageIcon hat1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT 1.png");
+    ImageIcon hat2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT 2.png");
+    ImageIcon hat3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT 3.png");
+    ImageIcon hat4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT 4.png");
+    ImageIcon hat5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT 5.png");
+    Image scaledProductImage71 = hat1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage72 = hat2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage73 = hat3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage74 = hat4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage75 = hat5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon71 = new ImageIcon(scaledProductImage71);
+    ImageIcon scaledProductIcon72 = new ImageIcon(scaledProductImage72);
+    ImageIcon scaledProductIcon73 = new ImageIcon(scaledProductImage73);
+    ImageIcon scaledProductIcon74 = new ImageIcon(scaledProductImage74);
+    ImageIcon scaledProductIcon75 = new ImageIcon(scaledProductImage75);
+    JButton hat1 = new JButton(scaledProductIcon71);
+    JButton hat2 = new JButton(scaledProductIcon72);
+    JButton hat3 = new JButton(scaledProductIcon73);
+    JButton hat4 = new JButton(scaledProductIcon74);
+    JButton hat5 = new JButton(scaledProductIcon75);
+
+    // For shoes
+    ImageIcon shoe1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE 1.png");
+    ImageIcon shoe2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE 2.png");
+    ImageIcon shoe3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE 3.png");
+    ImageIcon shoe4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE 4.png");
+    ImageIcon shoe5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE 5.png");
+    Image scaledProductImage81 = shoe1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage82 = shoe2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage83 = shoe3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage84 = shoe4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage85 = shoe5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon81 = new ImageIcon(scaledProductImage81);
+    ImageIcon scaledProductIcon82 = new ImageIcon(scaledProductImage82);
+    ImageIcon scaledProductIcon83 = new ImageIcon(scaledProductImage83);
+    ImageIcon scaledProductIcon84 = new ImageIcon(scaledProductImage84);
+    ImageIcon scaledProductIcon85 = new ImageIcon(scaledProductImage85);
+    JButton shoe1 = new JButton(scaledProductIcon81);
+    JButton shoe2 = new JButton(scaledProductIcon82);
+    JButton shoe3 = new JButton(scaledProductIcon83);
+    JButton shoe4 = new JButton(scaledProductIcon84);
+    JButton shoe5 = new JButton(scaledProductIcon85);
+
+    // For sandals
+    ImageIcon sandal1_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL 1.png");
+    ImageIcon sandal2_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL 2.png");
+    ImageIcon sandal3_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL 3.png");
+    ImageIcon sandal4_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL 4.png");
+    ImageIcon sandal5_image = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL 5.png");
+    Image scaledProductImage91 = sandal1_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage92 = sandal2_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage93 = sandal3_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage94 = sandal4_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    Image scaledProductImage95 = sandal5_image.getImage().getScaledInstance(buttonWidth2, buttonHeight2, Image.SCALE_SMOOTH);
+    ImageIcon scaledProductIcon91 = new ImageIcon(scaledProductImage91);
+    ImageIcon scaledProductIcon92 = new ImageIcon(scaledProductImage92);
+    ImageIcon scaledProductIcon93 = new ImageIcon(scaledProductImage93);
+    ImageIcon scaledProductIcon94 = new ImageIcon(scaledProductImage94);
+    ImageIcon scaledProductIcon95 = new ImageIcon(scaledProductImage95);
+    JButton sandal1 = new JButton(scaledProductIcon91);
+    JButton sandal2 = new JButton(scaledProductIcon92);
+    JButton sandal3 = new JButton(scaledProductIcon93);
+    JButton sandal4 = new JButton(scaledProductIcon94);
+    JButton sandal5 = new JButton(scaledProductIcon95);
+    
+    public UkayLuxe() {
+        playMusic("D:\\Ukay Luxe\\MUSIC\\BGM.wav");
+        BGImage = new ImageIcon("D:\\Ukay Luxe\\BACKGROUND\\OFFICIAL LP.jpeg").getImage();
+        BGImage2 = new ImageIcon("D:\\Ukay Luxe\\BACKGROUND\\OFFICIAL HP.jpeg").getImage();
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                stopMusic();
+                System.exit(0);
+            }
+        });
+        setUndecorated(true);
+        
+        initializeCart();
+        LandingPage();
+        setVisible(true);
+    }
+
+    private void playMusic(String musicFilePath) {
+        try {
+            File musicFile = new File(musicFilePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // Loop music
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            
+        }
+    }
+
+    private void stopMusic() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+        }
+    }
+
+    private void LandingPage() {
+        getContentPane().removeAll();
+
+        JPanel landingpage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        landingpage.setLayout(null);
+        setContentPane(landingpage);
+
+        ukayna.setBackground(new Color(250, 190, 93));
+        ukayna.setForeground(Color.WHITE);
+        ukayna.setFont(new Font("Impact", Font.BOLD, 45));
+        ukayna.setFocusable(false);
+        ukayna.setBounds(565, 670, 250, 50);
+        ukayna.setBorder(buttonBorder);
+        ukayna.addActionListener(this);
+
+        landingpage.add(ukayna);
+        landingpage.add(close);
+
+        revalidate();
+        repaint();
+    }
+
+    private void Homepage() {
+        getContentPane().removeAll();
+
+        JPanel homepage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        homepage.setLayout(null);
+        setContentPane(homepage);
+
+        // SHIRTS button
+        shirts.setFocusable(false);
+        shirts.setBounds(100, 100, buttonWidth, buttonHeight);
+        shirts.setBorder(buttonBorder);
+        shirts.addActionListener(this);
+
+        // SHORTS button
+        shorts.setFocusable(false);
+        shorts.setBounds(350, 100, buttonWidth, buttonHeight);
+        shorts.setBorder(buttonBorder);
+        shorts.addActionListener(this);
+
+        // PANTS button
+        pants.setFocusable(false);
+        pants.setBounds(600, 100, buttonWidth, buttonHeight);
+        pants.setBorder(buttonBorder);
+        pants.addActionListener(this);
+
+        // POLO SHIRTS button
+        polo_shirts.setFocusable(false);
+        polo_shirts.setBounds(850, 100, buttonWidth, buttonHeight);
+        polo_shirts.setBorder(buttonBorder);
+        polo_shirts.addActionListener(this);
+
+        // SWEAT SHIRTS button
+        sweat_shirts.setFocusable(false);
+        sweat_shirts.setBounds(1100, 100, buttonWidth, buttonHeight);
+        sweat_shirts.setBorder(buttonBorder);
+        sweat_shirts.addActionListener(this);
+
+        // DRESSES button
+        dresses.setFocusable(false);
+        dresses.setBounds(100, 425, buttonWidth, buttonHeight);
+        dresses.setBorder(buttonBorder);
+        dresses.addActionListener(this);
+
+        // JACKETS button
+        jackets.setFocusable(false);
+        jackets.setBounds(350, 425, buttonWidth, buttonHeight);
+        jackets.setBorder(buttonBorder);
+        jackets.addActionListener(this);
+
+        // HATS button
+        hats.setFocusable(false);
+        hats.setBounds(600, 425, buttonWidth, buttonHeight);
+        hats.setBorder(buttonBorder);
+        hats.addActionListener(this);
+
+        // SHOES button
+        shoes.setFocusable(false);
+        shoes.setBounds(850, 425, buttonWidth, buttonHeight);
+        shoes.setBorder(buttonBorder);
+        shoes.addActionListener(this);
+
+        // SANDALS button
+        sandals.setFocusable(false);
+        sandals.setBounds(1100, 425, buttonWidth, buttonHeight);
+        sandals.setBorder(buttonBorder);
+        sandals.addActionListener(this);
+
+        homepage.add(shirts);
+        homepage.add(shorts);
+        homepage.add(pants);
+        homepage.add(polo_shirts);
+        homepage.add(sweat_shirts);
+        homepage.add(dresses);
+        homepage.add(jackets);
+        homepage.add(hats);
+        homepage.add(shoes);
+        homepage.add(sandals);
+        homepage.add(cart);
+        homepage.add(close);
+        homepage.add(back12);
+
+        revalidate();
+        repaint();
+    }
+    
+    private void initializeCart() {
+        String[] columns = {"Product", "Quantity", "Size", "Price"};
+        cartModel = new DefaultTableModel(columns, 0);
+        cartTable = new JTable(cartModel);
+    }
+    
+    private void addToCart(String product, int quantity, String size, double price) {
+        double totalPrice = price * quantity; // Calculate total price
+        cartModel.addRow(new Object[]{product, quantity, size, totalPrice});
+        System.out.println("Added to cart: " + product + ", Quantity: " + quantity + ", Size: " + size + ", Total: $" + totalPrice);
+    }
+
+    private void checkout() {
+        // Clear all rows in the cart model (which will remove all products from the table)
+        cartModel.setRowCount(0);  // This will clear all rows in the table
+
+        // Show a message indicating the checkout process is complete
+        JOptionPane.showMessageDialog(this, "Checkout successful! Your cart is now empty.");
+    }
+
+    private void removeFromCart() {
+        int selectedRow = cartTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            cartModel.removeRow(selectedRow);
+            JOptionPane.showMessageDialog(this, "Item removed from cart.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No item selected!");
+        }
+    }
+    
+    private void showAddToCartDialog(String productName, double price) {
+        while (true) {
+            // Create input fields 
+            JTextField quantityField = new JTextField(); 
+            JTextField sizeField = new JTextField(); 
+
+            // Dialog content 
+            Object[] message = { 
+                "Enter Quantity:", quantityField, 
+                "Enter Size (e.g., S, M, L, XL, XXL):", sizeField 
+            }; 
+
+            int option = JOptionPane.showConfirmDialog(
+                null,
+                message,
+                "Add to Cart",
+                JOptionPane.OK_CANCEL_OPTION
+            );
+
+            if (option == JOptionPane.CANCEL_OPTION || option == JOptionPane.CLOSED_OPTION) {
+                return; // Exit if canceled or closed
+            }
+
+            try {
+                int quantity = Integer.parseInt(quantityField.getText().trim());
+                String size = sizeField.getText().trim().toUpperCase();
+
+                if (quantity <= 0) {
+                    JOptionPane.showMessageDialog(null, "Quantity must be greater than zero.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    continue; // Prompt again for valid input
+                }
+
+                if (!size.matches("^(S|M|L|XL|XXL)$")) {
+                    JOptionPane.showMessageDialog(null, "Size must be one of: S, M, L, XL, XXL.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    continue; // Prompt again for valid input
+                }
+
+                // Valid inputs - add to cart 
+                addToCart(productName, quantity, size, price); 
+                JOptionPane.showMessageDialog(null, "Added to cart!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                break; // Exit loop after successful addition
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Quantity must be a valid number.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                // Prompt again for valid input
+            }
+        }
+    }
+
+    private void CartPage() {
+        getContentPane().removeAll();
+        JPanel CartPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        CartPage.setLayout(null);
+        
+        JScrollPane scrollPane = new JScrollPane(cartTable);
+        scrollPane.setBounds(50, 100, 700, 650);
+        CartPage.add(scrollPane);
+
+        JButton removeButton = new JButton("Remove Product");
+        removeButton.setBounds(800, 100, 150, 30);
+        removeButton.addActionListener(e -> removeFromCart());
+        CartPage.add(removeButton);
+        
+        // Add the Checkout button
+        JButton checkoutButton = new JButton("Checkout");
+        checkoutButton.setBounds(800, 150, 150, 30);
+        checkoutButton.addActionListener(e -> checkout());
+        CartPage.add(checkoutButton);
+        
+        setContentPane(CartPage);
+        CartPage.add(back);
+        CartPage.add(close);
+        revalidate();
+        repaint();
+    }
+
+    private void Shirts() {
+        getContentPane().removeAll();
+
+        JPanel ShirtsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShirtsPage.setLayout(null);
+        setContentPane(ShirtsPage);
+
+        shirts1.setFocusable(false);
+        shirts1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        shirts1.setBorder(buttonBorder);
+        shirts1.addActionListener(this);
+
+        shirts2.setFocusable(false);
+        shirts2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        shirts2.setBorder(buttonBorder);
+        shirts2.addActionListener(this);
+
+        shirts3.setFocusable(false);
+        shirts3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        shirts3.setBorder(buttonBorder);
+        shirts3.addActionListener(this);
+
+        shirts4.setFocusable(false);
+        shirts4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        shirts4.setBorder(buttonBorder);
+        shirts4.addActionListener(this);
+
+        shirts5.setFocusable(false);
+        shirts5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        shirts5.setBorder(buttonBorder);
+        shirts5.addActionListener(this);
+
+        ShirtsPage.add(back);
+        ShirtsPage.add(close);
+        ShirtsPage.add(cart);
+        ShirtsPage.add(shirts1);
+        ShirtsPage.add(shirts2);
+        ShirtsPage.add(shirts3);
+        ShirtsPage.add(shirts4);
+        ShirtsPage.add(shirts5);
+
+        revalidate();
+        repaint();
+    }
+
+     private void ShirtProduct1() {
+        getContentPane().removeAll();
+
+        JPanel ShirtProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Positive Vibes Tee
+                         
+                         Description: Embrace a positive mindset with the Positive Vibes Tee. This beige t-shirt features a bold, circular graphic on the back with the words "SEEK THE POSITIVE" in a retro, eye-catching font. Made from soft, high-quality cotton, this tee is perfect for casual wear and spreading good vibes wherever you go.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $29.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShirtProduct1Page.add(textArea);
+        
+        ShirtProduct1Page.add(label);
+        ShirtProduct1Page.add(back2);
+        ShirtProduct1Page.add(close);
+        ShirtProduct1Page.add(cart);
+        add2cart.addActionListener(e -> showAddToCartDialog("Positive Vibes Tee", 29.99));
+        ShirtProduct1Page.add(add2cart);
+        ShirtProduct1Page.setLayout(null);
+        ShirtProduct1Page.setVisible(true);
+        setContentPane(ShirtProduct1Page);
+        revalidate();
+        repaint();
+    }
+
+     private void ShirtProduct2() {
+        getContentPane().removeAll();
+
+        JPanel ShirtProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShirtProduct2Page.setLayout(null);
+        setContentPane(ShirtProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Urban Survival Tee
+                         
+                         Description: Make a bold statement with the Urban Survival Tee. This white T-shirt features a graffiti-inspired design with the words "AFFECT" and "CASUAL" printed in black across the top, near the shoulders. The centerpiece is an abstract, urban graphic in green and black, with the powerful slogan "NO MORE SURVIVAL" emblazoned across the bottom. Made from premium quality cotton, this tee is perfect for those who want to stand out and express their individuality.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $35.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShirtProduct2Page.add(textArea);
+        
+        ShirtProduct2Page.add(label);
+        ShirtProduct2Page.add(back2);
+        ShirtProduct2Page.add(close);
+        ShirtProduct2Page.add(cart);
+        add2cart.addActionListener(e -> showAddToCartDialog("Urban Survival Tee", 35.99));
+        ShirtProduct2Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+     private void ShirtProduct3() {
+        getContentPane().removeAll();
+
+        JPanel ShirtProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShirtProduct3Page.setLayout(null);
+        setContentPane(ShirtProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Galactic Dreamer T-Shirt
+                         
+                         Description: The Galactic Dreamer T-Shirt is a stylish and motivational piece of apparel designed for those who chase their dreams relentlessly. This blue t-shirt features bold white text on the back that reads "WAIT FOR NOBODY" and "CHASE YOUR DREAMS, DON'T SLOW DOWN." The design includes a futuristic globe graphic with the year "1991" and the acronym "STWL" beneath it. Made from high-quality, comfortable fabric, this t-shirt is perfect for everyday wear and serves as a constant reminder to keep pushing forward.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $29.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShirtProduct3Page.add(label);
+        ShirtProduct3Page.add(textArea);
+        
+
+        ShirtProduct3Page.add(back2);
+        ShirtProduct3Page.add(close);
+        ShirtProduct3Page.add(cart);
+        ShirtProduct3Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+     private void ShirtProduct4() {
+        getContentPane().removeAll();
+
+        JPanel ShirtProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShirtProduct4Page.setLayout(null);
+        setContentPane(ShirtProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Perspective Enhancer Tee
+                         
+                         Description: Elevate your outlook with the Perspective Enhancer Tee. This brown T-shirt features a striking design with the bold yellow text "Widen your Perspective" emblazoned across the chest. Beneath this inspirational message, smaller yellow texts encourage you to "IMAGINE POSSIBILITIES," "CHALLENGE CONVENTIONS," and mark the journey since 2000. Crafted from premium quality fabric, this T-shirt offers comfort and style, making it perfect for those who believe in constant growth and innovation.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $27.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShirtProduct4Page.add(textArea);
+        
+        ShirtProduct4Page.add(label);
+        ShirtProduct4Page.add(back2);
+        ShirtProduct4Page.add(close);
+        ShirtProduct4Page.add(cart);
+        ShirtProduct4Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+     private void ShirtProduct5() {
+        getContentPane().removeAll();
+
+        JPanel ShirtProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShirtProduct5Page.setLayout(null);
+        setContentPane(ShirtProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\T-SHIRTS\\T-SHIRT BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Harmony Balance Tee
+                         
+                         Description: Find your balance with the Harmony Balance Tee. This light pink T-shirt features an intricate design on the back that combines various symbols and text to emphasize the theme of balance and duality. With bold black text and graphics like "RVCA," a globe, and phrases such as "Balance of OPPOSITES," this tee encapsulates the harmony between contrasting elements like nature and industry, peace and war, and past and present. Crafted from soft, high-quality cotton, this T-shirt is perfect for those who appreciate thoughtful design and profound messages.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $32.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShirtProduct5Page.add(textArea);
+        
+        ShirtProduct5Page.add(label);
+        ShirtProduct5Page.add(back2);
+        ShirtProduct5Page.add(close);
+        ShirtProduct5Page.add(cart);
+        ShirtProduct5Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+
+    private void Shorts() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortsPage.setLayout(null);
+        setContentPane(ShortsPage);
+
+        shorts1.setFocusable(false);
+        shorts1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        shorts1.setBorder(buttonBorder);
+        shorts1.addActionListener(this);
+
+        shorts2.setFocusable(false);
+        shorts2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        shorts2.setBorder(buttonBorder);
+        shorts2.addActionListener(this);
+
+        shorts3.setFocusable(false);
+        shorts3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        shorts3.setBorder(buttonBorder);
+        shorts3.addActionListener(this);
+
+        shorts4.setFocusable(false);
+        shorts4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        shorts4.setBorder(buttonBorder);
+        shorts4.addActionListener(this);
+
+        shorts5.setFocusable(false);
+        shorts5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        shorts5.setBorder(buttonBorder);
+        shorts5.addActionListener(this);
+
+        ShortsPage.add(back);
+        ShortsPage.add(close);
+        ShortsPage.add(cart);
+        ShortsPage.add(shorts1);
+        ShortsPage.add(shorts2);
+        ShortsPage.add(shorts3);
+        ShortsPage.add(shorts4);
+        ShortsPage.add(shorts5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void ShortProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortProduct1Page.setLayout(null);
+        setContentPane(ShortProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Precision Performance Shorts
+                         
+                         Description: Step up your workout game with the Precision Performance Shorts. These black athletic shorts feature white trim for a sleek, contrasting look and an elastic waistband with a drawstring for a comfortable, adjustable fit. Whether you're hitting the gym, going for a run, or just lounging at home, these shorts are designed to keep you comfortable and stylish.
+                         
+                         Size: Available in S, M, L, XL, XXL
+                         
+                         Price: $24.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShortProduct1Page.add(textArea);
+        ShortProduct1Page.add(label);
+
+        ShortProduct1Page.add(back3);
+        ShortProduct1Page.add(close);
+        ShortProduct1Page.add(cart);
+        ShortProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void ShortProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortProduct2Page.setLayout(null);
+        setContentPane(ShortProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Gemstone Embellished Denim Shorts
+                         
+                         Description: These unique denim shorts feature intricate gemstone embellishments on the front, adding a touch of sparkle and personality to your casual wardrobe. The light blue denim is complemented by colorful stones arranged in eye-catching patterns, making these shorts a standout piece for any outfit. With a comfortable fit and practical pockets, these shorts are perfect for both everyday wear and special occasions.
+                         
+                         Size: Available in sizes S, M, L, XL
+                         
+                         Price: $79.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShortProduct2Page.add(textArea);
+        ShortProduct2Page.add(label);
+
+        ShortProduct2Page.add(back3);
+        ShortProduct2Page.add(close);
+        ShortProduct2Page.add(cart);
+        ShortProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void ShortProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortProduct3Page.setLayout(null);
+        setContentPane(ShortProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Blue Breeze Denim Shorts
+                         
+                         Description: Experience the perfect blend of style and comfort with our Blue Breeze Denim Shorts. Crafted from high-quality medium-weight denim, these shorts offer a timeless look with their classic button and zipper closure, belt loops, and functional pockets on the front and back. The slightly worn look adds a touch of vintage charm, making them perfect for casual outings and summer adventures. Embrace the cool, relaxed vibes and make every day feel like a breezy day at the beach.
+                         
+                         Size: Available in sizes 26-34 (Waist)
+                         
+                         Price: $32.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShortProduct3Page.add(textArea);
+        ShortProduct3Page.add(label);
+
+        ShortProduct3Page.add(back3);
+        ShortProduct3Page.add(close);
+        ShortProduct3Page.add(cart);
+        ShortProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void ShortProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortProduct4Page.setLayout(null);
+        setContentPane(ShortProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Off-White™ Active Aero Shorts
+                         
+                         Description: Enhance your workout gear with the Off-White™ Active Aero Shorts. These high-performance shorts feature a sleek black design with striking white piping along the edges. The waistband proudly displays the iconic OFF-WHITE™ branding, complemented by a vibrant blue drawstring with red tips for a secure fit. Adorned with a small Nike logo on the left leg and an arrow graphic on the right leg, these shorts seamlessly blend style and function. Perfect for both casual wear and intense training sessions, they provide unmatched comfort and a distinctive look.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $79.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShortProduct4Page.add(textArea);
+        ShortProduct4Page.add(label);
+
+        ShortProduct4Page.add(back3);
+        ShortProduct4Page.add(close);
+        ShortProduct4Page.add(cart);
+        ShortProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void ShortProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel ShortProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShortProduct5Page.setLayout(null);
+        setContentPane(ShortProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHORTS\\SHORT BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Wolf Pack Performance Shorts
+                         
+                         Description: Unleash your inner strength with the Wolf Pack Performance Shorts. Designed for athletes who demand both style and functionality, these green shorts feature a bold white drawstring for a secure fit and the word "WOLVES" printed on the left leg. The right leg showcases a striking graphic of a wolf's head, symbolizing power and resilience. Made from breathable, moisture-wicking fabric, these shorts ensure maximum comfort during intense workouts or casual wear. Embrace the spirit of the wolf and conquer your fitness goals with confidence.
+                         
+                         Size: Available in sizes S-XL
+                         
+                         Price: $29.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShortProduct5Page.add(textArea);
+        ShortProduct5Page.add(label);
+
+        ShortProduct5Page.add(back3);
+        ShortProduct5Page.add(close);
+        ShortProduct5Page.add(cart);
+        ShortProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void Pants() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsPage.setLayout(null);
+        setContentPane(PantsPage);
+
+        pants1.setFocusable(false);
+        pants1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        pants1.setBorder(buttonBorder);
+        pants1.addActionListener(this);
+
+        pants2.setFocusable(false);
+        pants2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        pants2.setBorder(buttonBorder);
+        pants2.addActionListener(this);
+
+        pants3.setFocusable(false);
+        pants3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        pants3.setBorder(buttonBorder);
+        pants3.addActionListener(this);
+
+        pants4.setFocusable(false);
+        pants4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        pants4.setBorder(buttonBorder);
+        pants4.addActionListener(this);
+
+        pants5.setFocusable(false);
+        pants5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        pants5.setBorder(buttonBorder);
+        pants5.addActionListener(this);
+
+        PantsPage.add(back);
+        PantsPage.add(close);
+        PantsPage.add(cart);
+        PantsPage.add(pants1);
+        PantsPage.add(pants2);
+        PantsPage.add(pants3);
+        PantsPage.add(pants4);
+        PantsPage.add(pants5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PantsProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsProduct1Page.setLayout(null);
+        setContentPane(PantsProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Blueheart Vintage Denim
+                         
+                         Description: Step into timeless style with our Blueheart Vintage Denim jeans. These high-waisted, straight-leg jeans feature a charming embroidered blue heart on the right front pocket, adding a unique touch of personality to your wardrobe. Crafted with a classic five-pocket design, belt loops, and a button and zipper closure, these jeans combine practicality with a slightly faded and distressed look for that perfect vintage feel. Whether you're dressing up or down, the Blueheart Vintage Denim will be your go-to for effortless fashion.
+                         
+                         Size: Available in sizes 24-32 (Waist)
+                         
+                         Price: $45.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PantsProduct1Page.add(textArea);
+        PantsProduct1Page.add(label);
+
+        PantsProduct1Page.add(back4);
+        PantsProduct1Page.add(close);
+        PantsProduct1Page.add(cart);
+        PantsProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PantsProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsProduct2Page.setLayout(null);
+        setContentPane(PantsProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Capri Freeworld Cargo Pants
+                         
+                         Description: Step into a world of comfort and style with the Capri Freeworld Cargo Pants. These black pants are designed with a modern, edgy aesthetic featuring bold white text and graphics. The left leg showcases the word "CAPRI:" in large, striking letters, while the right leg is adorned with three overlapping "C" letters, a cut-out hole in the knee area, and a graphic of a globe with a peace sign, accompanied by the word "FREEWORLD." Made from a soft, comfortable material and equipped with an elastic waistband, these pants offer the perfect blend of functionality and flair. Ideal for casual wear or making a statement, these cargo pants will elevate your wardrobe.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $49.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PantsProduct2Page.add(textArea);
+        PantsProduct2Page.add(label);
+
+        PantsProduct2Page.add(back4);
+        PantsProduct2Page.add(close);
+        PantsProduct2Page.add(cart);
+        PantsProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PantsProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsProduct3Page.setLayout(null);
+        setContentPane(PantsProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Midnight Racer Track Pants
+                         
+                         Description: Elevate your athletic wear with the Midnight Racer Track Pants. These sleek black pants feature crisp white piping along the sides, adding a touch of dynamic style to your workout ensemble. The small white logo on the left thigh adds a subtle branding element, while the elastic waistband ensures a secure and comfortable fit. Crafted from lightweight, breathable material, these track pants are perfect for sports activities or casual wear. Whether you're hitting the gym or running errands, the Midnight Racer Track Pants offer both functionality and a modern look.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $39.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PantsProduct3Page.add(textArea);
+        PantsProduct3Page.add(label);
+
+        PantsProduct3Page.add(back4);
+        PantsProduct3Page.add(close);
+        PantsProduct3Page.add(cart);
+        PantsProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PantsProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsProduct4Page.setLayout(null);
+        setContentPane(PantsProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: CamoCrest Adventure Pants
+                         
+                         Description: Gear up for the wilderness with our CamoCrest Adventure Pants. These pants feature a classic woodland camouflage pattern with shades of green, brown, and tan, perfect for blending into forested environments. Designed for durability, they are made from sturdy fabric ideal for outdoor activities like hiking, camping, or hunting. The detailed pattern includes images of leaves, branches, and other natural elements to ensure you stay concealed. With multiple pockets and a comfortable fit, the CamoCrest Adventure Pants are your go-to choice for any outdoor adventure.
+                         
+                         Size: Available in sizes M-XXL
+                         
+                         Price: $59.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PantsProduct4Page.add(textArea);
+        PantsProduct4Page.add(label);
+
+        PantsProduct4Page.add(back4);
+        PantsProduct4Page.add(close);
+        PantsProduct4Page.add(cart);
+        PantsProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PantsProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PantsProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PantsProduct5Page.setLayout(null);
+        setContentPane(PantsProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\PANTS\\PANTS BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Urban Expression Joggers
+                         
+                         Description: Unleash your inner artist with our Urban Expression Joggers. These gray joggers are more than just casual wear; they're a statement. Featuring bold designs and text, including a large orange abstract graphic on the left leg and the phrase "FOR YOU!" in black text, these joggers are perfect for those who love to stand out. The right pocket showcases a white outline of a character, adding a touch of urban flair. With a drawstring waistband and two large front pockets, these joggers combine style and comfort effortlessly. Whether you're hitting the streets or lounging at home, the Urban Expression Joggers will keep you looking effortlessly cool.
+                         
+                         Size: Available in sizes S-XL
+                         
+                         Price: $39.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PantsProduct5Page.add(textArea);
+        PantsProduct5Page.add(label);
+
+        PantsProduct5Page.add(back4);
+        PantsProduct5Page.add(close);
+        PantsProduct5Page.add(cart);
+        PantsProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirts() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtsPage.setLayout(null);
+        setContentPane(PoloShirtsPage);
+
+        p_shirt1.setFocusable(false);
+        p_shirt1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        p_shirt1.setBorder(buttonBorder);
+        p_shirt1.addActionListener(this);
+
+        p_shirt2.setFocusable(false);
+        p_shirt2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        p_shirt2.setBorder(buttonBorder);
+        p_shirt2.addActionListener(this);
+
+        p_shirt3.setFocusable(false);
+        p_shirt3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        p_shirt3.setBorder(buttonBorder);
+        p_shirt3.addActionListener(this);
+
+        p_shirt4.setFocusable(false);
+        p_shirt4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        p_shirt4.setBorder(buttonBorder);
+        p_shirt4.addActionListener(this);
+
+        p_shirt5.setFocusable(false);
+        p_shirt5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        p_shirt5.setBorder(buttonBorder);
+        p_shirt5.addActionListener(this);
+
+        PoloShirtsPage.add(back);
+        PoloShirtsPage.add(close);
+        PoloShirtsPage.add(cart);
+        PoloShirtsPage.add(p_shirt1);
+        PoloShirtsPage.add(p_shirt2);
+        PoloShirtsPage.add(p_shirt3);
+        PoloShirtsPage.add(p_shirt4);
+        PoloShirtsPage.add(p_shirt5);
+
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirtProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtProduct1Page.setLayout(null);
+        setContentPane(PoloShirtProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Laurel Crest Polo
+                         
+                         Description: Embrace timeless sophistication with the Laurel Crest Polo. This dark green polo shirt features a classic design with a two-button placket, a collar, and short sleeves. The left chest area boasts an elegant embroidered logo of a laurel wreath, symbolizing victory and excellence. The collar and sleeve cuffs are adorned with stylish stripes in white, red, and yellow, adding a subtle yet distinctive touch. Whether you're heading to a casual outing or a semi-formal event, the Laurel Crest Polo ensures you look sharp and effortlessly stylish.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $49.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PoloShirtProduct1Page.add(textArea);
+        PoloShirtProduct1Page.add(label);
+
+        PoloShirtProduct1Page.add(back5);
+        PoloShirtProduct1Page.add(close);
+        PoloShirtProduct1Page.add(cart);
+        PoloShirtProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirtProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtProduct2Page.setLayout(null);
+        setContentPane(PoloShirtProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Hilfiger Classic Polo
+                         
+                         Description: Elevate your casual wardrobe with the Hilfiger Classic Polo. This cream-colored polo shirt exudes a timeless charm, featuring a refined collar and short sleeves with striking red, white, and blue stripes on the collar and sleeve cuffs. The left chest area proudly displays the embroidered text HILFIGER 85, while the left sleeve is adorned with a small, distinguished logo. Perfect for any occasion, this polo shirt combines comfort and style effortlessly, making it a versatile addition to your collection.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $59.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PoloShirtProduct2Page.add(textArea);
+        PoloShirtProduct2Page.add(label);
+
+        PoloShirtProduct2Page.add(back5);
+        PoloShirtProduct2Page.add(close);
+        PoloShirtProduct2Page.add(cart);
+        PoloShirtProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirtProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtProduct3Page.setLayout(null);
+        setContentPane(PoloShirtProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Meadow Mist Polo
+                         
+                         Description: Step into elegance with the Meadow Mist Polo. This light green polo shirt features a crisp white collar and sleeve cuffs, accented with a thin black stripe that adds a touch of sophistication. The shirt is crafted for comfort and style, with a two-button placket and a small rectangular label on the left chest area for a subtle branding touch. Perfect for casual outings or semi-formal events, the Meadow Mist Polo offers a versatile and timeless addition to your wardrobe.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $34.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PoloShirtProduct3Page.add(textArea);
+        PoloShirtProduct3Page.add(label);
+
+        PoloShirtProduct3Page.add(back5);
+        PoloShirtProduct3Page.add(close);
+        PoloShirtProduct3Page.add(cart);
+        PoloShirtProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirtProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtProduct4Page.setLayout(null);
+        setContentPane(PoloShirtProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Midnight Edge Polo
+                         
+                         Description: Step into sleek sophistication with the Midnight Edge Polo. This black polo shirt features striking white piping along the collar, sleeves, and zipper area, adding a touch of modern elegance. The zipper extends from the collar down to the chest, allowing for versatile styling options. Designed for both casual and semi-formal occasions, the Midnight Edge Polo combines classic design with contemporary flair, making it a must-have in any wardrobe.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $39.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PoloShirtProduct4Page.add(textArea);
+        PoloShirtProduct4Page.add(label);
+
+        PoloShirtProduct4Page.add(back5);
+        PoloShirtProduct4Page.add(close);
+        PoloShirtProduct4Page.add(cart);
+        PoloShirtProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void PoloShirtProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel PoloShirtProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        PoloShirtProduct5Page.setLayout(null);
+        setContentPane(PoloShirtProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\POLO SHIRTS\\POLO SHIRT BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Café Chic Polo
+                         
+                         Description: Step into timeless elegance with the Café Chic Polo. This cream-colored shirt boasts a classic design accented with thin, dark stripes along the collar and sleeve edges. Perfect for both casual and semi-formal occasions, this polo offers a refined and versatile style. Whether you’re heading to a laid-back brunch or a casual office meeting, the Café Chic Polo ensures you always look polished and sophisticated.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $35.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        PoloShirtProduct5Page.add(textArea);
+        PoloShirtProduct5Page.add(label);
+
+        PoloShirtProduct5Page.add(back5);
+        PoloShirtProduct5Page.add(close);
+        PoloShirtProduct5Page.add(cart);
+        PoloShirtProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void SweatShirts() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtsPage.setLayout(null);
+        setContentPane(SweatShirtsPage);
+
+        s_shirt1.setFocusable(false);
+        s_shirt1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        s_shirt1.setBorder(buttonBorder);
+        s_shirt1.addActionListener(this);
+
+        s_shirt2.setFocusable(false);
+        s_shirt2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        s_shirt2.setBorder(buttonBorder);
+        s_shirt2.addActionListener(this);
+
+        s_shirt3.setFocusable(false);
+        s_shirt3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        s_shirt3.setBorder(buttonBorder);
+        s_shirt3.addActionListener(this);
+
+        s_shirt4.setFocusable(false);
+        s_shirt4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        s_shirt4.setBorder(buttonBorder);
+        s_shirt4.addActionListener(this);
+
+        s_shirt5.setFocusable(false);
+        s_shirt5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        s_shirt5.setBorder(buttonBorder);
+        s_shirt5.addActionListener(this);
+
+        SweatShirtsPage.add(back);
+        SweatShirtsPage.add(close);
+        SweatShirtsPage.add(cart);
+        SweatShirtsPage.add(s_shirt1);
+        SweatShirtsPage.add(s_shirt2);
+        SweatShirtsPage.add(s_shirt3);
+        SweatShirtsPage.add(s_shirt4);
+        SweatShirtsPage.add(s_shirt5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+     private void SweatShirtProduct1() {
+         getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtProduct1Page.setLayout(null);
+        setContentPane(SweatShirtProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Green Horizon Sweatshirt
+                         
+                         Description: Elevate your casual wardrobe with the Green Horizon Sweatshirt. This white sweatshirt features a bold green horizontal stripe across the chest with the stylish “Ben Sherman” text in white cursive letters. The collar has a chic green trim, complementing the ribbed cuffs for a refined finish. The small circular logo on the left sleeve adds a subtle yet distinctive touch. Perfect for any casual outing, this sweatshirt combines comfort with a touch of class.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $59.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SweatShirtProduct1Page.add(textArea);
+        SweatShirtProduct1Page.add(label);
+
+        SweatShirtProduct1Page.add(back6);
+        SweatShirtProduct1Page.add(close);
+        SweatShirtProduct1Page.add(cart);
+        SweatShirtProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void SweatShirtProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtProduct2Page.setLayout(null);
+        setContentPane(SweatShirtProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Evergreen Statement Sweatshirt
+                         
+                         Description: Elevate your casual wardrobe with the Evergreen Statement Sweatshirt. This green sweatshirt features a bold printed text that reads: "CLOSED TWENTY FOUR SEVEN International Clothing Company EST. 1978". With its comfortable fit and stylish design, this sweatshirt is perfect for making a statement wherever you go. Crafted from high-quality, soft fabric, it ensures warmth and comfort while adding a touch of vintage-inspired flair to your outfit.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $49.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SweatShirtProduct2Page.add(textArea);
+        SweatShirtProduct2Page.add(label);
+
+        SweatShirtProduct2Page.add(back6);
+        SweatShirtProduct2Page.add(close);
+        SweatShirtProduct2Page.add(cart);
+        SweatShirtProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void SweatShirtProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtProduct3Page.setLayout(null);
+        setContentPane(SweatShirtProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Brooklyn Stripes Half-Zip Polo
+                         
+                         Description: Unveil a sporty charm with the Brooklyn Stripes Half-Zip Polo. This casual long-sleeved polo features bold horizontal stripes in red and white, making it a vibrant addition to your wardrobe. The half-zipper at the collar adds a modern twist, while the "NY BROOKLYN" embroidery on the left chest area provides a nod to urban style. Perfect for both relaxed weekends and stylish outings, this polo ensures you stay comfortable and fashionable.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $39.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SweatShirtProduct3Page.add(textArea);
+        SweatShirtProduct3Page.add(label);
+
+        SweatShirtProduct3Page.add(back6);
+        SweatShirtProduct3Page.add(close);
+        SweatShirtProduct3Page.add(cart);
+        SweatShirtProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void SweatShirtProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtProduct4Page.setLayout(null);
+        setContentPane(SweatShirtProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Equestrian Elegance Sweatshirt
+                         
+                         Description: Elevate your casual wear with the Equestrian Elegance Sweatshirt. This light gray sweatshirt features a refined design showcasing a horse bit illustration at its center, surrounded by the text "SPORTY & RICH EQUESTRIAN CLUB" in a stylish green circular arrangement. The classic crew neck and long sleeves with ribbed cuffs and hem provide a comfortable fit, while the sophisticated equestrian theme adds a touch of class. Perfect for both laid-back days and stylish outings, the Equestrian Elegance Sweatshirt seamlessly blends comfort and style.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $64.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SweatShirtProduct4Page.add(textArea);
+        SweatShirtProduct4Page.add(label);
+
+        SweatShirtProduct4Page.add(back6);
+        SweatShirtProduct4Page.add(close);
+        SweatShirtProduct4Page.add(cart);
+        SweatShirtProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void SweatShirtProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel SweatShirtProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SweatShirtProduct5Page.setLayout(null);
+        setContentPane(SweatShirtProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SWEATSHIRTS\\SWEATSHIRT BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Vintage Peace Sweatshirt
+                         
+                         Description: Channel a serene vintage vibe with the Vintage Peace Sweatshirt. This light pink, long-sleeved sweatshirt features stylish dark brown accents on the collar, placket, and shoulder areas, adding a touch of retro flair. The front proudly displays the text "VINTAGE HUMAN OF PEACE" beneath a small graphic of a checkered flag, symbolizing harmony and unity. Designed for both comfort and style, this sweatshirt is perfect for cozy days and casual outings.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $54.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SweatShirtProduct5Page.add(textArea);
+        SweatShirtProduct5Page.add(label);
+
+        SweatShirtProduct5Page.add(back6);
+        SweatShirtProduct5Page.add(close);
+        SweatShirtProduct5Page.add(cart);
+        SweatShirtProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void Dresses() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel DressesPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressesPage.setLayout(null);
+        setContentPane(DressesPage);
+
+        dress1.setFocusable(false);
+        dress1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        dress1.setBorder(buttonBorder);
+        dress1.addActionListener(this);
+
+        dress2.setFocusable(false);
+        dress2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        dress2.setBorder(buttonBorder);
+        dress2.addActionListener(this);
+
+        dress3.setFocusable(false);
+        dress3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        dress3.setBorder(buttonBorder);
+        dress3.addActionListener(this);
+
+        dress4.setFocusable(false);
+        dress4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        dress4.setBorder(buttonBorder);
+        dress4.addActionListener(this);
+
+        dress5.setFocusable(false);
+        dress5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        dress5.setBorder(buttonBorder);
+        dress5.addActionListener(this);
+
+        DressesPage.add(back);
+        DressesPage.add(close);
+        DressesPage.add(cart);
+        DressesPage.add(dress1);
+        DressesPage.add(dress2);
+        DressesPage.add(dress3);
+        DressesPage.add(dress4);
+        DressesPage.add(dress5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+        private void DressProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel DressProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressProduct1Page.setLayout(null);
+        setContentPane(DressProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Navy Enchantment Dress
+                         
+                         Description: Turn heads with the Navy Enchantment Dress. This elegant navy blue dress features a sophisticated V-neckline and long, flowing sleeves with ruffled cuffs for a touch of whimsy. The dress boasts a gathered, ruched skirt that falls asymmetrically, creating a draped effect that's both fashionable and flattering. The cinched waist and adjustable drawstrings at the bottom add versatility, allowing you to customize the fit to your liking. Perfect for any special occasion or a night out, the Navy Enchantment Dress promises to make you feel effortlessly chic.
+                         
+                         Size: Available in sizes XS-XL
+                         
+                         Price: $89.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        DressProduct1Page.add(textArea);
+        DressProduct1Page.add(label);
+
+        DressProduct1Page.add(back7);
+        DressProduct1Page.add(close);
+        DressProduct1Page.add(cart);
+        DressProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void DressProduct2() {
+        getContentPane().removeAll();
+        JPanel DressProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressProduct2Page.setLayout(null);
+        setContentPane(DressProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Sweet Pea Bow Dress
+                         
+                         Description: Elevate your wardrobe with the Sweet Pea Bow Dress. This light green dress features thin shoulder straps and a fitted, smocked bodice for a stretchy, comfortable fit. The sweetheart neckline adds a touch of elegance, while the large bow tied at the waist provides a charming focal point. The flared skirt with its slightly pleated appearance creates a flowy and feminine silhouette, perfect for various occasions. Whether you’re attending a garden party or a casual summer outing, the Sweet Pea Bow Dress combines comfort and style effortlessly.
+                         
+                         Size: Available in sizes XS-XL
+                         
+                         Price: $44.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        DressProduct2Page.add(textArea);
+        DressProduct2Page.add(label);
+
+        DressProduct2Page.add(back7);
+        DressProduct2Page.add(close);
+        DressProduct2Page.add(cart);
+        DressProduct2Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void DressProduct3() {
+        getContentPane().removeAll();
+        JPanel DressProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressProduct3Page.setLayout(null);
+        setContentPane(DressProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Noir Élegance Dress
+                         
+                         Description: Step into the spotlight with the Noir Élegance Dress. This stunning black strapless mini dress features a form-fitting, ruched design that exudes sophistication. The standout element is the long, sheer, flowing fabric pieces attached to the sides, adding a dramatic and ethereal touch to your look. Perfect for upscale events or a night out, this dress promises to make you feel like the epitome of elegance and style.
+                         
+                         Size: Available in sizes XS-XL
+                         
+                         Price: $89.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        DressProduct3Page.add(textArea);
+        DressProduct3Page.add(label);
+
+        DressProduct3Page.add(back7);
+        DressProduct3Page.add(close);
+        DressProduct3Page.add(cart);
+        DressProduct3Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void DressProduct4() {
+        getContentPane().removeAll();
+        JPanel DressProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressProduct4Page.setLayout(null);
+        setContentPane(DressProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Blossom Whimsy Dress
+                         
+                         Description: Step into a world of elegance with the Blossom Whimsy Dress. This sleeveless dress features a fitted bodice with a sweetheart neckline, adorned with a delicate pattern of small pink and green flowers on a white background. The thin shoulder straps and slight ruching at the center add a touch of charm, while the flared skirt with a side slit brings a hint of sophistication. Perfect for spring or summer occasions, this dress is a blend of classic style and contemporary flair.
+                         
+                         Size: Available in sizes XS-L
+                         
+                         Price: $59.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        DressProduct4Page.add(textArea);
+        DressProduct4Page.add(label);
+
+        DressProduct4Page.add(back7);
+        DressProduct4Page.add(close);
+        DressProduct4Page.add(cart);
+        DressProduct4Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void DressProduct5() {
+        getContentPane().removeAll();
+        JPanel DressProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        DressProduct5Page.setLayout(null);
+        setContentPane(DressProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\DRESSES\\DRESS BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Enchanted Houndstooth Dress
+                         
+                         Description: Turn heads with the Enchanted Houndstooth Dress, a perfect blend of vintage charm and modern elegance. This dress features a fitted, houndstooth-patterned bodice with a deep V-neckline and a large, pointed white collar adorned with delicate lace trim. The long, white, puffed sleeves gather gracefully at the wrists, adding a touch of romantic flair. Ideal for both day and evening events, the Enchanted Houndstooth Dress exudes sophistication and style, making it a must-have addition to your wardrobe.
+                         
+                         Size: Available in sizes XS-XL
+                         
+                         Price: $74.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        DressProduct5Page.add(textArea);
+        DressProduct5Page.add(label);
+
+        DressProduct5Page.add(back7);
+        DressProduct5Page.add(close);
+        DressProduct5Page.add(cart);
+        DressProduct5Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void Jackets() {
+        // Clear existing components
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketsPage.setLayout(null);
+        setContentPane(JacketsPage);
+
+        jacket1.setFocusable(false);
+        jacket1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        jacket1.setBorder(buttonBorder);
+        jacket1.addActionListener(this);
+
+        jacket2.setFocusable(false);
+        jacket2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        jacket2.setBorder(buttonBorder);
+        jacket2.addActionListener(this);
+
+        jacket3.setFocusable(false);
+        jacket3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        jacket3.setBorder(buttonBorder);
+        jacket3.addActionListener(this);
+
+        jacket4.setFocusable(false);
+        jacket4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        jacket4.setBorder(buttonBorder);
+        jacket4.addActionListener(this);
+
+        jacket5.setFocusable(false);
+        jacket5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        jacket5.setBorder(buttonBorder);
+        jacket5.addActionListener(this);
+
+        JacketsPage.add(back);
+        JacketsPage.add(close);
+        JacketsPage.add(cart);
+        JacketsPage.add(jacket1);
+        JacketsPage.add(jacket2);
+        JacketsPage.add(jacket3);
+        JacketsPage.add(jacket4);
+        JacketsPage.add(jacket5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void JacketProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketProduct1Page.setLayout(null);
+        setContentPane(JacketProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Blue Streak Racer Jacket
+                         
+                         Description: Rev up your wardrobe with the Blue Streak Racer Jacket. This stylish blue jacket with beige and orange accents is perfect for those who love a bold, sporty look. Featuring a prominent "LETTER" text across the chest and a rich embroidered badge with a racing theme, this jacket screams speed and style. The number "7" on the left sleeve and various racing-related patches add authenticity to the design. The beige collar and button-up front with striped cuffs and waistband complete the look, making it a standout piece for any racing enthusiast or fashion-forward individual.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $89.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        JacketProduct1Page.add(textArea);
+        JacketProduct1Page.add(label);
+
+        JacketProduct1Page.add(back8);
+        JacketProduct1Page.add(close);
+        JacketProduct1Page.add(cart);
+        JacketProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void JacketProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketProduct2Page.setLayout(null);
+        setContentPane(JacketProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3); 
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Pop Culture Patchwork Jacket
+                         
+                         Description: Embrace a unique blend of nostalgia and style with the Pop Culture Patchwork Jacket. This eye-catching jacket features a high collar, a zipper down the front, and a combination of brown and white colors. Adorned with various patches and text that pay homage to iconic pop culture elements, it includes the playful "DONALD DUCK" and "TURBO" on the chest, the bold "SEAL BEAR" across the chest, "The Beatles" on the lower left side, and the numbers "1986" and "25" on the zipper and right sleeve, respectively. The jacket's eclectic design is perfect for those who love to make a statement with their fashion choices.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $89.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        JacketProduct2Page.add(textArea);
+        JacketProduct2Page.add(label);
+
+        JacketProduct2Page.add(back8);
+        JacketProduct2Page.add(close);
+        JacketProduct2Page.add(cart);
+        JacketProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void JacketProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketProduct3Page.setLayout(null);
+        setContentPane(JacketProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Urban Explorer Patch Jacket
+                         
+                         Description: Express your adventurous spirit with the Urban Explorer Patch Jacket. This white jacket, accented with bold black details, is adorned with an array of striking patches and text that capture a sporty, racing-inspired aesthetic. The prominent "EINSICHT" text stretches across the chest, while the numbers "6" and "8" on the lower front add a touch of dynamic flair. The assortment of smaller patches, including a checkered flag and various brand-like logos, completes the jacket's unique look. Perfect for making a statement, this jacket blends style and functionality seamlessly, ideal for those who love to stand out in any crowd.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $79.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        JacketProduct3Page.add(textArea);
+        JacketProduct3Page.add(label);
+
+        JacketProduct3Page.add(back8);
+        JacketProduct3Page.add(close);
+        JacketProduct3Page.add(cart);
+        JacketProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void JacketProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketProduct4Page.setLayout(null);
+        setContentPane(JacketProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Grym Journey Jacket
+                         
+                         Description: Embrace a stylish adventure with the Grym Journey Jacket. This beige jacket features contrasting brown accents along the collar, shoulders, and sleeves, creating a sleek and refined look. The zipper front and dual front pockets outlined in brown trim add both functionality and flair. The left chest area displays the text "GRYM" in a striking font, while below the left shoulder, the inspiring phrase "Take My Hand, Understand My Soul, Walk My Steps" adds a touch of poetic charm. Perfect for exploring new places or enhancing your everyday attire, this jacket combines comfort and sophistication.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $79.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        JacketProduct4Page.add(textArea);
+        JacketProduct4Page.add(label);
+
+        JacketProduct4Page.add(back8);
+        JacketProduct4Page.add(close);
+        JacketProduct4Page.add(cart);
+        JacketProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void JacketProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel JacketProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        JacketProduct5Page.setLayout(null);
+        setContentPane(JacketProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\JACKETS\\JACKET BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Eden Urban Explorer Jacket
+                         
+                         Description: Make a bold statement with the Eden Urban Explorer Jacket. This jacket features a striking combination of light blue, dark blue, and beige colors, making it a standout piece in any wardrobe. The front showcases a captivating graphic print of a person holding a large bag, alongside text elements like "AELFRIC EDEN," "ONT," and "MARCH," adding an edgy, modern touch. The high collar with yellow piping, button-up front, and ribbed cuffs and hem ensure both style and comfort. Designed for the fashion-forward individual, this jacket blends urban aesthetics with practical design elements for a truly unique look.
+                         
+                         Size: Available in sizes S-XXL
+                         
+                         Price: $99.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        JacketProduct5Page.add(textArea);
+        JacketProduct5Page.add(label);
+
+        JacketProduct5Page.add(back8);
+        JacketProduct5Page.add(close);
+        JacketProduct5Page.add(cart);
+        JacketProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void Hats() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatsPage.setLayout(null);
+        setContentPane(HatsPage);
+
+        hat1.setFocusable(false);
+        hat1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        hat1.setBorder(buttonBorder);
+        hat1.addActionListener(this);
+
+        hat2.setFocusable(false);
+        hat2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        hat2.setBorder(buttonBorder);
+        hat2.addActionListener(this);
+
+        hat3.setFocusable(false);
+        hat3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        hat3.setBorder(buttonBorder);
+        hat3.addActionListener(this);
+
+        hat4.setFocusable(false);
+        hat4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        hat4.setBorder(buttonBorder);
+        hat4.addActionListener(this);
+
+        hat5.setFocusable(false);
+        hat5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        hat5.setBorder(buttonBorder);
+        hat5.addActionListener(this);
+
+        HatsPage.add(back);
+        HatsPage.add(close);
+        HatsPage.add(cart);
+        HatsPage.add(hat1);
+        HatsPage.add(hat2);
+        HatsPage.add(hat3);
+        HatsPage.add(hat4);
+        HatsPage.add(hat5);
+
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void HatProduct1() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatProduct1Page.setLayout(null);
+        setContentPane(HatProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Gustavia Heritage Cap
+                         
+                         Description: Elevate your casual wardrobe with the Gustavia Heritage Cap. This navy blue baseball cap features a vintage-inspired patch on the front, showcasing the text "ZADIG ET VOLTAIRE GUSTAVIA SAINT-BARTH" with frayed edges, adding a touch of rugged charm. Made from soft, durable fabric, this classic six-panel design includes a top button for a timeless look. Perfect for sunny days or as a stylish accessory, the Gustavia Heritage Cap embodies both comfort and fashion.
+                         
+                         Size: One size fits all (adjustable strap)
+                         
+                         Price: $29.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        HatProduct1Page.add(textArea);
+        HatProduct1Page.add(label);
+
+        HatProduct1Page.add(back9);
+        HatProduct1Page.add(close);
+        HatProduct1Page.add(cart);
+        HatProduct1Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void HatProduct2() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatProduct2Page.setLayout(null);
+        setContentPane(HatProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Polo Legend Cap
+                         
+                         Description: Add a touch of classic elegance to your wardrobe with the Polo Legend Cap. This beige baseball cap features a striking black embroidered logo of a polo player on horseback, positioned prominently on the front panel. The cap boasts a curved brim and a button on top, ensuring a timeless and versatile style. Made from high-quality, durable fabric, this cap is perfect for both casual and semi-formal settings, offering a blend of comfort and sophistication.
+                         
+                         Size: One size fits all (adjustable strap)
+                         
+                         Price: $34.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        HatProduct2Page.add(textArea);
+        HatProduct2Page.add(label);
+
+        HatProduct2Page.add(back9);
+        HatProduct2Page.add(close);
+        HatProduct2Page.add(cart);
+        HatProduct2Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void HatProduct3() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatProduct3Page.setLayout(null);
+        setContentPane(HatProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Yankees Heritage Cap
+                         
+                         Description: Show your team pride with the Yankees Heritage Cap. This light green baseball cap features the iconic New York Yankees logo embroidered prominently on the front, representing a timeless piece of sports history. The cap is designed with a curved brim for a classic look and visible stitching for added detail. A small New Era logo on the side adds a touch of authenticity. Perfect for any Yankees fan, this cap combines style and team spirit in a versatile and comfortable accessory.
+                         
+                         Size: One size fits all (adjustable strap)
+                         
+                         Price: $34.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        HatProduct3Page.add(textArea);
+        HatProduct3Page.add(label);
+
+        HatProduct3Page.add(back9);
+        HatProduct3Page.add(close);
+        HatProduct3Page.add(cart);
+        HatProduct3Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void HatProduct4() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatProduct4Page.setLayout(null);
+        setContentPane(HatProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Celine Couture Bucket Hat
+                         
+                         Description: Step up your fashion game with the Celine Couture Bucket Hat. This sleek white bucket hat features the iconic "CELINE" logo boldly printed in black, making it a must-have accessory for any fashion enthusiast. Designed with a wide brim and a slightly tapered crown, it offers both style and sun protection. Perfect for a day out in the city or a casual stroll on the beach, this hat adds a touch of luxury to any outfit.
+                         
+                         Size: One size fits all
+                         
+                         Price: $149.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        HatProduct4Page.add(textArea);
+        HatProduct4Page.add(label);
+
+        HatProduct4Page.add(back9);
+        HatProduct4Page.add(close);
+        HatProduct4Page.add(cart);
+        HatProduct4Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void HatProduct5() {
+        getContentPane().removeAll();
+
+        // Set content panel with custom background image (for the homepage)
+        JPanel HatProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        HatProduct5Page.setLayout(null);
+        setContentPane(HatProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\HATS\\HAT BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Jacquemus Chic Bucket Hat
+                         
+                         Description: Elevate your style with the Jacquemus Chic Bucket Hat. This beige bucket hat, featuring the brand name "JACQUEMUS" embroidered on the front and displayed on a black tag on the brim, perfectly balances sophistication and functionality. The wide brim provides ample sun protection, while the adjustable chin strap ensures a secure and comfortable fit. Whether you're heading to the beach or a casual city outing, this hat adds a touch of luxury to any outfit.
+                         
+                         Size: One size fits all (adjustable chin strap)
+                         
+                         Price: $169.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        HatProduct5Page.add(textArea);
+        HatProduct5Page.add(label);
+
+        HatProduct5Page.add(back9);
+        HatProduct5Page.add(close);
+        HatProduct5Page.add(cart);
+        HatProduct5Page.add(add2cart);
+        // Refresh layout and repaint the frame
+        revalidate();
+        repaint();
+    }
+
+    private void Shoes() {
+        getContentPane().removeAll();
+
+        JPanel ShoesPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoesPage.setLayout(null);
+        setContentPane(ShoesPage);
+
+        shoe1.setFocusable(false);
+        shoe1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        shoe1.setBorder(buttonBorder);
+        shoe1.addActionListener(this);
+
+        shoe2.setFocusable(false);
+        shoe2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        shoe2.setBorder(buttonBorder);
+        shoe2.addActionListener(this);
+
+        shoe3.setFocusable(false);
+        shoe3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        shoe3.setBorder(buttonBorder);
+        shoe3.addActionListener(this);
+
+        shoe4.setFocusable(false);
+        shoe4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        shoe4.setBorder(buttonBorder);
+        shoe4.addActionListener(this);
+
+        shoe5.setFocusable(false);
+        shoe5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        shoe5.setBorder(buttonBorder);
+        shoe5.addActionListener(this);
+
+        ShoesPage.add(back);
+        ShoesPage.add(close);
+        ShoesPage.add(cart);
+        ShoesPage.add(shoe1);
+        ShoesPage.add(shoe2);
+        ShoesPage.add(shoe3);
+        ShoesPage.add(shoe4);
+        ShoesPage.add(shoe5);
+
+        revalidate();
+        repaint();
+    }
+
+    private void ShoeProduct1() {
+        getContentPane().removeAll();
+
+        JPanel ShoeProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoeProduct1Page.setLayout(null);
+        setContentPane(ShoeProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Nimbus Classic Trainers
+                         
+                         Description: Step up your casual and athletic style with the Nimbus Classic Trainers. These primarily white athletic shoes are accented with beige and light brown, adding a touch of modern sophistication. The breathable mesh upper ensures comfort during workouts or casual wear, while the cushioned sole provides excellent support. The standout feature is the iconic 'N' logo on the sides, symbolizing top-tier quality. Perfect for both running and everyday activities, these trainers blend functionality with timeless design.
+                         
+                         Size: Available in sizes 6-12
+                         
+                         Price: $89.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShoeProduct1Page.add(textArea);
+        ShoeProduct1Page.add(label);
+
+        ShoeProduct1Page.add(back10);
+        ShoeProduct1Page.add(close);
+        ShoeProduct1Page.add(cart);
+        ShoeProduct1Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void ShoeProduct2() {
+        getContentPane().removeAll();
+
+        JPanel ShoeProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoeProduct2Page.setLayout(null);
+        setContentPane(ShoeProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         PProduct Name: Swift Strike Sneakers
+                         
+                         Description: Step into style and performance with the Swift Strike Sneakers. These sleek white athletic shoes feature a bold black sole and a prominent swoosh logo on the sides, ensuring you make a statement wherever you go. Designed with multiple overlays and perforations, these shoes provide excellent breathability and support. The sculpted midsole with geometric patterns offers superior cushioning, making them perfect for both sports and casual wear. The white laces and convenient pull tabs on the heel and tongue add to the functionality and ease of use.
+                         
+                         Size: Available in sizes 6-12
+                         
+                         Price: $99.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShoeProduct2Page.add(textArea);
+        ShoeProduct2Page.add(label);
+
+        ShoeProduct2Page.add(back10);
+        ShoeProduct2Page.add(close);
+        ShoeProduct2Page.add(cart);
+        ShoeProduct2Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void ShoeProduct3() {
+        getContentPane().removeAll();
+
+        JPanel ShoeProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoeProduct3Page.setLayout(null);
+        setContentPane(ShoeProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Adidas Breeze Classic Sneakers
+                         
+                         Description: Step up your shoe game with the Adidas Breeze Classic Sneakers. These sneakers are primarily white with cool blue accents, giving them a fresh and timeless appeal. The classic Adidas logo on the tongue and side, along with the perforations on the toe box for ventilation, provide both style and functionality. The iconic blue stripe detail on the side adds a touch of athletic elegance. Perfect for casual outings or everyday wear, these sneakers blend comfort, style, and the unmistakable Adidas heritage.
+                         
+                         Size: Available in sizes 6-12
+                         
+                         Price: $79.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShoeProduct3Page.add(textArea);
+        ShoeProduct3Page.add(label);
+
+        ShoeProduct3Page.add(back10);
+        ShoeProduct3Page.add(close);
+        ShoeProduct3Page.add(cart);
+        ShoeProduct3Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void ShoeProduct4() {
+        getContentPane().removeAll();
+
+        JPanel ShoeProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoeProduct4Page.setLayout(null);
+        setContentPane(ShoeProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Classic Maroon Star Sneakers
+                         
+                         Description: Step into timeless style with the Classic Maroon Star Sneakers. These high-top sneakers feature a striking maroon color with white laces and rubber soles for a bold and classic look. The round logo patch on the inner side, showcasing a star and text, adds a touch of vintage charm. Designed for both comfort and style, these sneakers are perfect for casual outings and everyday wear. Whether you're hitting the streets or heading to a casual event, the Classic Maroon Star Sneakers will ensure you stand out with their iconic design.
+                         
+                         Size: Available in sizes 6-12
+                         
+                         Price: $74.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShoeProduct4Page.add(textArea);
+        ShoeProduct4Page.add(label);
+
+        ShoeProduct4Page.add(back10);
+        ShoeProduct4Page.add(close);
+        ShoeProduct4Page.add(cart);
+        ShoeProduct4Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void ShoeProduct5() {
+        getContentPane().removeAll();
+
+        JPanel ShoeProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        ShoeProduct5Page.setLayout(null);
+        setContentPane(ShoeProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SHOES\\SHOE BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Desert Trek Sneakers
+                         
+                         Description: Step up your style game with the Desert Trek Sneakers. These beige sneakers feature a sleek black Nike swoosh logo on the sides, complemented by a rugged, wavy sole with a brown gum outsole for a touch of outdoor flair. The design includes a convenient pull tab on the heel and a secure lace-up closure, making them perfect for casual or athletic wear. Combining style and functionality, the Desert Trek Sneakers are a versatile addition to any wardrobe.
+                         
+                         Size: Available in sizes 6-12
+                         
+                         Price:""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        ShoeProduct5Page.add(textArea);
+        ShoeProduct5Page.add(label);
+
+        ShoeProduct5Page.add(back10);
+        ShoeProduct5Page.add(close);
+        ShoeProduct5Page.add(cart);
+        ShoeProduct5Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void Sandals() {
+        getContentPane().removeAll();
+
+        JPanel SandalsPage = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalsPage.setLayout(null);
+        setContentPane(SandalsPage);
+
+        sandal1.setFocusable(false);
+        sandal1.setBounds(product1x, producty, buttonWidth2, buttonHeight2);
+        sandal1.setBorder(buttonBorder);
+        sandal1.addActionListener(this);
+
+        sandal2.setFocusable(false);
+        sandal2.setBounds(product2x, producty, buttonWidth2, buttonHeight2);
+        sandal2.setBorder(buttonBorder);
+        sandal2.addActionListener(this);
+
+        sandal3.setFocusable(false);
+        sandal3.setBounds(product3x, producty, buttonWidth2, buttonHeight2);
+        sandal3.setBorder(buttonBorder);
+        sandal3.addActionListener(this);
+
+        sandal4.setFocusable(false);
+        sandal4.setBounds(product4x, producty, buttonWidth2, buttonHeight2);
+        sandal4.setBorder(buttonBorder);
+        sandal4.addActionListener(this);
+
+        sandal5.setFocusable(false);
+        sandal5.setBounds(product5x, producty, buttonWidth2, buttonHeight2);
+        sandal5.setBorder(buttonBorder);
+        sandal5.addActionListener(this);
+
+        SandalsPage.add(back);
+        SandalsPage.add(close);
+        SandalsPage.add(cart);
+        SandalsPage.add(sandal1);
+        SandalsPage.add(sandal2);
+        SandalsPage.add(sandal3);
+        SandalsPage.add(sandal4);
+        SandalsPage.add(sandal5);
+
+        revalidate();
+        repaint();
+    }
+
+    private void SandalProduct1() {
+        getContentPane().removeAll();
+
+        JPanel SandalProduct1Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalProduct1Page.setLayout(null);
+        setContentPane(SandalProduct1Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL BIG 1.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Sophisticated Chic Heels
+                         
+                         Description: Step into elegance with the Sophisticated Chic Heels. These white high-heeled sandals feature a single strap over the toes and a sleek ankle strap with a buckle, ensuring both style and support. The beige insole, adorned with the luxurious "JIMMY CHOO" branding, adds a touch of high-end sophistication. With tall, slender heels, these sandals are perfect for making a statement at any formal event or special occasion. Designed for the fashion-forward individual, they seamlessly combine luxury with comfort.
+                         
+                         Size: Available in sizes 5-11
+                         
+                         Price: $495.00""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SandalProduct1Page.add(textArea);
+        SandalProduct1Page.add(label);
+
+        SandalProduct1Page.add(back11);
+        SandalProduct1Page.add(close);
+        SandalProduct1Page.add(cart);
+        SandalProduct1Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void SandalProduct2() {
+        getContentPane().removeAll();
+
+        JPanel SandalProduct2Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalProduct2Page.setLayout(null);
+        setContentPane(SandalProduct2Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL BIG 2.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Modern Elegance Sandals
+                         
+                         Description: Step out in style with the Modern Elegance Sandals. These beige sandals feature a sleek design with wide straps and intricate cut-out details, offering a perfect blend of comfort and sophistication. The black sole provides a striking contrast, adding a modern touch to the overall look. Ideal for casual outings or evening strolls, these sandals are made from high-quality materials, ensuring durability and comfort with every step.
+                         
+                         Size: Available in sizes 5-11
+                         
+                         Price: $59.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SandalProduct2Page.add(textArea);
+        SandalProduct2Page.add(label);
+
+        SandalProduct2Page.add(back11);
+        SandalProduct2Page.add(close);
+        SandalProduct2Page.add(cart);
+        SandalProduct2Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void SandalProduct3() {
+        getContentPane().removeAll();
+
+        JPanel SandalProduct3Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalProduct3Page.setLayout(null);
+        setContentPane(SandalProduct3Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL BIG 3.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Elegance Heeled Sandals
+                         
+                         Description: Step into sophistication with the Elegance Heeled Sandals. These white high-heeled sandals feature a sleek and modern design with block heels for both style and comfort. The minimalist look is achieved with two thin straps across the toes and an ankle strap with a buckle, ensuring a secure and elegant fit. The light beige insole complements the overall design, making these sandals perfect for any formal event, night out, or stylish daily wear.
+                         
+                         Size: Available in sizes 5-11
+                         
+                         Price: $69.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SandalProduct3Page.add(textArea);
+        SandalProduct3Page.add(label);
+
+        SandalProduct3Page.add(back11);
+        SandalProduct3Page.add(close);
+        SandalProduct3Page.add(cart);
+        SandalProduct3Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void SandalProduct4() {
+        getContentPane().removeAll();
+
+        JPanel SandalProduct4Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalProduct4Page.setLayout(null);
+        setContentPane(SandalProduct4Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL BIG 4.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Chic Chain Detail Sandals
+                         
+                         Description: Step into luxury with the Chic Chain Detail Sandals. These white high-heeled sandals feature a sleek square toe design and thin straps for a minimalist yet sophisticated look. The standout detail is the unique ankle strap with a metallic circular element and a chain, adding an edgy, fashionable twist to the classic stiletto style. The branded "JIMMY CHOO" insole ensures high-end appeal. Perfect for any formal event or night out, these sandals effortlessly combine elegance and style.
+                         
+                         Size: Available in sizes 5-11
+                         
+                         Price: $495.00""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SandalProduct4Page.add(textArea);
+        SandalProduct4Page.add(label);
+
+        SandalProduct4Page.add(back11);
+        SandalProduct4Page.add(close);
+        SandalProduct4Page.add(cart);
+        SandalProduct4Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private void SandalProduct5() {
+        getContentPane().removeAll();
+
+        JPanel SandalProduct5Page = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(BGImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        SandalProduct5Page.setLayout(null);
+        setContentPane(SandalProduct5Page);
+        
+        ImageIcon imageIcon = new ImageIcon("D:\\Ukay Luxe\\PRODUCTS IMAGES\\SANDALS\\SANDAL BIG 5.png");
+        JLabel label = new JLabel(imageIcon);
+        label.setBounds(productpageX,productpageY,buttonWidth3,buttonHeight3);
+        label.setBorder(buttonBorder);
+        JTextArea textArea = new JTextArea(10,10);
+        textArea.setText("""
+                         Product Name: Timeless Grace Sandals
+                         
+                         Description: Step into minimalist elegance with the Timeless Grace Sandals. These white sandals feature a simple yet stylish design, with a strap across the toes and another strap around the ankle, fastened with a small gold buckle. The flat sole ensures comfort, making them perfect for both casual and semi-formal occasions. Their understated sophistication makes them a versatile addition to any wardrobe, seamlessly blending fashion and comfort.
+                         
+                         Size: Available in sizes 5-11
+                         
+                         Price: $49.99""");
+        textArea.setFont(new Font("Arial", Font.BOLD, 24)); // Adjusted font size
+        textArea.setForeground(Color.WHITE);
+        textArea.setBounds(590, 100, 750, 550); // Adjusted bounds to fit the content
+        textArea.setBackground(new Color(182, 214, 237));
+        textArea.setLineWrap(true); // Enable word wrap
+        textArea.setWrapStyleWord(true); // Wrap at word boundaries
+        textArea.setEditable(false); // Optional: Prevent editing by the user
+        textArea.setOpaque(false);
+        SandalProduct5Page.add(textArea);
+        SandalProduct5Page.add(label);
+
+        SandalProduct5Page.add(back11);
+        SandalProduct5Page.add(close);
+        SandalProduct5Page.add(cart);
+        SandalProduct5Page.add(add2cart);
+        revalidate();
+        repaint();
+    }
+
+    private JButton Close() {
+        JButton closeButton = new JButton("X");
+        closeButton.setBounds(1275, 20, 60, 40);
+        closeButton.setFont(new Font("Arial", Font.BOLD, 30));
+        closeButton.setBackground(Color.WHITE);
+        closeButton.setForeground(Color.BLACK);
+        closeButton.setFocusPainted(false);
+        closeButton.addActionListener(e -> System.exit(0)); // Exit the app
+        return closeButton;
+    }
+
+    private JButton ReturnToLandingPage() {
+        JButton returnButton = new JButton("<-");
+        returnButton.setBounds(1200, 20, 70, 40);
+        returnButton.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setForeground(Color.BLACK);
+        returnButton.setFocusPainted(false);
+        returnButton.addActionListener(e -> LandingPage());
+        return returnButton;
+    }
+
+    private JButton ReturnToHomepage() {
+        JButton returnButton = new JButton("<-");
+        returnButton.setBounds(1200, 20, 70, 40);
+        returnButton.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setForeground(Color.BLACK);
+        returnButton.setFocusPainted(false);
+        returnButton.addActionListener(e -> Homepage());
+        return returnButton;
+    }
+
+    private JButton ReturnToShirtsPage() {
+        JButton returnButton2 = new JButton("<-");
+        returnButton2.setBounds(1200, 20, 70, 40);
+        returnButton2.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton2.setBackground(Color.WHITE);
+        returnButton2.setForeground(Color.BLACK);
+        returnButton2.setFocusPainted(false);
+        returnButton2.addActionListener(e -> Shirts());
+        return returnButton2;
+    }
+
+    private JButton ReturnToShortsPage() {
+        JButton returnButton3 = new JButton("<-");
+        returnButton3.setBounds(1200, 20, 70, 40);
+        returnButton3.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton3.setBackground(Color.WHITE);
+        returnButton3.setForeground(Color.BLACK);
+        returnButton3.setFocusPainted(false);
+        returnButton3.addActionListener(e -> Shorts());
+        return returnButton3;
+    }
+
+    private JButton ReturnToPantsPage() {
+        JButton returnButton4 = new JButton("<-");
+        returnButton4.setBounds(1200, 20, 70, 40);
+        returnButton4.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton4.setBackground(Color.WHITE);
+        returnButton4.setForeground(Color.BLACK);
+        returnButton4.setFocusPainted(false);
+        returnButton4.addActionListener(e -> Pants());
+        return returnButton4;
+    }
+
+    private JButton ReturnToPoloShirtsPage() {
+        JButton returnButton5 = new JButton("<-");
+        returnButton5.setBounds(1200, 20, 70, 40);
+        returnButton5.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton5.setBackground(Color.WHITE);
+        returnButton5.setForeground(Color.BLACK);
+        returnButton5.setFocusPainted(false);
+        returnButton5.addActionListener(e -> PoloShirts());
+        return returnButton5;
+    }
+
+    private JButton ReturnToSweatShirtsPage() {
+        JButton returnButton6 = new JButton("<-");
+        returnButton6.setBounds(1200, 20, 70, 40);
+        returnButton6.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton6.setBackground(Color.WHITE);
+        returnButton6.setForeground(Color.BLACK);
+        returnButton6.setFocusPainted(false);
+        returnButton6.addActionListener(e -> SweatShirts());
+        return returnButton6;
+    }
+
+    private JButton ReturnToDressesPage() {
+        JButton returnButton7 = new JButton("<-");
+        returnButton7.setBounds(1200, 20, 70, 40);
+        returnButton7.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton7.setBackground(Color.WHITE);
+        returnButton7.setForeground(Color.BLACK);
+        returnButton7.setFocusPainted(false);
+        returnButton7.addActionListener(e -> Dresses());
+        return returnButton7;
+    }
+
+    private JButton ReturnToJacketsPage() {
+        JButton returnButton8 = new JButton("<-");
+        returnButton8.setBounds(1200, 20, 70, 40);
+        returnButton8.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton8.setBackground(Color.WHITE);
+        returnButton8.setForeground(Color.BLACK);
+        returnButton8.setFocusPainted(false);
+        returnButton8.addActionListener(e -> Jackets());
+        return returnButton8;
+    }
+
+    private JButton ReturnToHatsPage() {
+        JButton returnButton9 = new JButton("<-");
+        returnButton9.setBounds(1200, 20, 70, 40);
+        returnButton9.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton9.setBackground(Color.WHITE);
+        returnButton9.setForeground(Color.BLACK);
+        returnButton9.setFocusPainted(false);
+        returnButton9.addActionListener(e -> Hats());
+        return returnButton9;
+    }
+
+    private JButton ReturnToShoesPage() {
+        JButton returnButton10 = new JButton("<-");
+        returnButton10.setBounds(1200, 20, 70, 40);
+        returnButton10.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton10.setBackground(Color.WHITE);
+        returnButton10.setForeground(Color.BLACK);
+        returnButton10.setFocusPainted(false);
+        returnButton10.addActionListener(e -> Shoes());
+        return returnButton10;
+    }
+
+    private JButton ReturnToSandalsPage() {
+        JButton returnButton11 = new JButton("<-");
+        returnButton11.setBounds(1200, 20, 70, 40);
+        returnButton11.setFont(new Font("Arial", Font.BOLD, 30));
+        returnButton11.setBackground(Color.WHITE);
+        returnButton11.setForeground(Color.BLACK);
+        returnButton11.setFocusPainted(false);
+        returnButton11.addActionListener(e -> Sandals());
+        return returnButton11;
+    }
+
+    private JButton Cart() {
+        JButton cartButton = new JButton("CART");
+        cartButton.setBounds(1095, 20, 100, 40);
+        cartButton.setFont(new Font("Arial", Font.BOLD, 20));
+        cartButton.setBackground(Color.WHITE);
+        cartButton.setForeground(Color.BLACK);
+        cartButton.setFocusPainted(false);
+        cartButton.addActionListener(this);
+        return cartButton;
+    }
+
+    private JButton AddToCart() {
+        JButton addcartbutton = new JButton("ADD TO CART");
+        addcartbutton.setBounds(840, 675, 250, 40);
+        addcartbutton.setFont(new Font("Arial", Font.BOLD, 20));
+        addcartbutton.setBackground(Color.WHITE);
+        addcartbutton.setForeground(Color.BLACK);
+        addcartbutton.setFocusPainted(false);
+        addcartbutton.addActionListener(this);
+        return addcartbutton;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == ukayna) {
+            Homepage();
+        }
+        if (e.getSource() == cart) {
+            CartPage();
+        }
+        if (e.getSource() == shirts) {
+            Shirts();
+        }
+        if (e.getSource() == shirts1) {
+            ShirtProduct1();
+        }
+        if (e.getSource() == shirts2) {
+            ShirtProduct2();
+        }
+        if (e.getSource() == shirts3) {
+            ShirtProduct3();
+        }
+        if (e.getSource() == shirts4) {
+            ShirtProduct4();
+        }
+        if (e.getSource() == shirts5) {
+            ShirtProduct5();
+        }
+        if (e.getSource() == shorts) {
+            Shorts();
+        }
+        if (e.getSource() == shorts1) {
+            ShortProduct1();
+        }
+        if (e.getSource() == shorts2) {
+            ShortProduct2();
+        }
+        if (e.getSource() == shorts3) {
+            ShortProduct3();
+        }
+        if (e.getSource() == shorts4) {
+            ShortProduct4();
+        }
+        if (e.getSource() == shorts5) {
+            ShortProduct5();
+        }
+        if (e.getSource() == pants) {
+            Pants();
+        }
+        if (e.getSource() == pants1) {
+            PantsProduct1();
+        }
+        if (e.getSource() == pants2) {
+            PantsProduct2();
+        }
+        if (e.getSource() == pants3) {
+            PantsProduct3();
+        }
+        if (e.getSource() == pants4) {
+            PantsProduct4();
+        }
+        if (e.getSource() == pants5) {
+            PantsProduct5();
+        }
+        if (e.getSource() == polo_shirts) {
+            PoloShirts();
+        }
+        if (e.getSource() == p_shirt1) {
+            PoloShirtProduct1();
+        }
+        if (e.getSource() == p_shirt2) {
+            PoloShirtProduct2();
+        }
+        if (e.getSource() == p_shirt3) {
+            PoloShirtProduct3();
+        }
+        if (e.getSource() == p_shirt4) {
+            PoloShirtProduct4();
+        }
+        if (e.getSource() == p_shirt5) {
+            PoloShirtProduct5();
+        }
+        if (e.getSource() == sweat_shirts) {
+            SweatShirts();
+        }
+        if (e.getSource() == s_shirt1) {
+            SweatShirtProduct1();
+        }
+        if (e.getSource() == s_shirt2) {
+            SweatShirtProduct2();
+        }
+        if (e.getSource() == s_shirt3) {
+            SweatShirtProduct3();
+        }
+        if (e.getSource() == s_shirt4) {
+            SweatShirtProduct4();
+        }
+        if (e.getSource() == s_shirt5) {
+            SweatShirtProduct5();
+        }
+        if (e.getSource() == dresses) {
+            Dresses();
+        }
+        if (e.getSource() == dress1) {
+            DressProduct1();
+        }
+        if (e.getSource() == dress2) {
+            DressProduct2();
+        }
+        if (e.getSource() == dress3) {
+            DressProduct3();
+        }
+        if (e.getSource() == dress4) {
+            DressProduct4();
+        }
+        if (e.getSource() == dress5) {
+            DressProduct5();
+        }
+        if (e.getSource() == jackets) {
+            Jackets();
+        }
+        if (e.getSource() == jacket1) {
+            JacketProduct1();
+        }
+        if (e.getSource() == jacket2) {
+            JacketProduct2();
+        }
+        if (e.getSource() == jacket3) {
+            JacketProduct3();
+        }
+        if (e.getSource() == jacket4) {
+            JacketProduct4();
+        }
+        if (e.getSource() == jacket5) {
+            JacketProduct5();
+        }
+        if (e.getSource() == hats) {
+            Hats();
+        }
+        if (e.getSource() == hat1) {
+            HatProduct1();
+        }
+        if (e.getSource() == hat2) {
+            HatProduct2();
+        }
+        if (e.getSource() == hat3) {
+            HatProduct3();
+        }
+        if (e.getSource() == hat4) {
+            HatProduct4();
+        }
+        if (e.getSource() == hat5) {
+            HatProduct5();
+        }
+        if (e.getSource() == shoes) {
+            Shoes();
+        }
+        if (e.getSource() == shoe1) {
+            ShoeProduct1();
+        }
+        if (e.getSource() == shoe2) {
+            ShoeProduct2();
+        }
+        if (e.getSource() == shoe3) {
+            ShoeProduct3();
+        }
+        if (e.getSource() == shoe4) {
+            ShoeProduct4();
+        }
+        if (e.getSource() == shoe5) {
+            ShoeProduct5();
+        }
+        if (e.getSource() == sandals) {
+            Sandals();
+        }
+        if (e.getSource() == sandal1) {
+            SandalProduct1();
+        }
+        if (e.getSource() == sandal2) {
+            SandalProduct2();
+        }
+        if (e.getSource() == sandal3) {
+            SandalProduct3();
+        }
+        if (e.getSource() == sandal4) {
+            SandalProduct4();
+        }
+        if (e.getSource() == sandal5) {
+            SandalProduct5();
+        }
+    }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(UkayLuxe::new);
+    }
+}
